@@ -1,0 +1,39 @@
+version: "3.1"
+services:
+    client:
+        container_name: react_client-1
+        build: ./client
+        ports:
+            - "3333:3000"
+        volumes:
+            - ./client/src:/usr/src/client/src
+            - ./client/public:/usr/src/client/public
+        links:
+            - api
+        networks:
+            - gotoappnetwork
+    api:
+        container_name: node_api-1
+        build: ./server
+        ports:
+            - "3005:3005"
+        volumes:
+            - ./server/src:/usr/src/server/src
+            - ./server/dist:/usr/src/server/dist
+        links:
+            - mongo
+        networks:
+            - gotoappnetwork
+    mongo:
+        image: mongo:4.2.1-bionic
+        volumes:
+            - ./mongovolume/dbmongo:/data/db
+        ports:
+            - "27017:27017"
+        networks:
+            - gotoappnetwork
+
+networks:
+    gotoappnetwork:
+        driver: bridge
+

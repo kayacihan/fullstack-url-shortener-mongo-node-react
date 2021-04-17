@@ -1,0 +1,29 @@
+{
+  "name": "fullstack-url-shortener-mongo-node-react",
+  "version": "1.0.0",
+  "description": "A url shortener Using React and Node with a/b testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kayacihan/fullstack-url-shortener-mongo-node-react.git"
+  },
+  "keywords": [],
+  "author": "Cihan Kaya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kayacihan/fullstack-url-shortener-mongo-node-react/issues"
+  },
+  "homepage": "https://github.com/kayacihan/fullstack-url-shortener-mongo-node-react#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.4"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}
