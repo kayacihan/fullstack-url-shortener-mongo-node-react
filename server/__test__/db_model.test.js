@@ -18,7 +18,7 @@ describe('Link model tests', () => {
         expect.assertions(1)
         try {
             await Link.create({
-                api: "bitly",
+                api: "goto",
                 count: 2,
                 short: "456trhgdfh"
             })
@@ -31,7 +31,7 @@ describe('Link model tests', () => {
 
         try {
             await Link.create({
-                api: "bitly",
+                api: "goto",
                 original: "https://www.youtube.com/watch?v=DscTDy9sZRg",
                 count: 2
             })
@@ -44,7 +44,7 @@ describe('Link model tests', () => {
 
         try {
             await Link.create({
-                api: "bitly",
+                api: "goto",
                 original: "https://www.youtube.com/watch?v=DscTDy9sZRg",
                 short: "567fghfgh",
             })
@@ -60,13 +60,13 @@ describe('Link model tests', () => {
             await Link.init() // wait for index to build
             await Link.create([
                 {
-                    api: "bitly",
+                    api: "goto",
                     original: "https://www.youtube.com/watch?v=DscTDy9sZRg",
                     count: 2,
                     short: "sameid",
                 },
                 {
-                    api: "bitly",
+                    api: "goto",
                     original: "https://www.youtube.com/watch?v=DscTDy9sZRg",
                     count: 2,
                     short: "sameid",

@@ -10,7 +10,10 @@ const LinksSchema = new mongoose.Schema({
   short: {
     type: String,
     required: true,
-    unique: true
+    index: {
+      unique: true,
+      dropDups: true
+    }
   },
   count: {
     type: Number,
