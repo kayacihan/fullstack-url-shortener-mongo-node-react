@@ -1,13 +1,15 @@
-FROM node:12
-# Create app directory
-WORKDIR /usr/src/client
-# Install app dependencies
-COPY package*.json ./
-RUN npm install
-# Copy app source code
-COPY . .
-# Build
-RUN npm run build
-#Expose port and start application
+FROM node:8.9-alpine
+
+# Create a work directory and copy over our dependency manifest files.
+WORKDIR /app
+
+COPY ["package.json", "package-lock.json*", "./"]
+
+# If you're using yarn:
+#  yarn build
+RUN npm install --silent && mv node_modules ../
+
+# Expose PORT 3000 on our virtual machine so we can run our server
 EXPOSE 3000
-CMD [ "npm", "start" ]
+
+RUN npm start
