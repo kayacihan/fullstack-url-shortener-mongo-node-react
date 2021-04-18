@@ -1,15 +1,13 @@
-FROM node:8.9-alpine
+FROM node:12-alpine as build
 
-# Create a work directory and copy over our dependency manifest files.
 WORKDIR /app
+COPY package.json /app/package.json
+RUN npm install
+COPY . /app
+RUN npm run build
 
-COPY ["package.json", "package-lock.json*", "./"]
+FROM nginx:1.16.0-alpine
+COPY --from=build /app/build /usr/share/nginx/html
 
-# If you're using yarn:
-#  yarn build
-RUN npm install --silent && mv node_modules ../
-
-# Expose PORT 3000 on our virtual machine so we can run our server
 EXPOSE 3000
-
-RUN npm start
+CMD ["nginx", "-g", "daemon off;"]
