@@ -1,4 +1,5 @@
 const validUrl = require('valid-url');
+var abTest = require('express-ab');
 
 const middleware = {
     validateUrl: (req, res, next) => {
