@@ -3,6 +3,7 @@ const cors = require('cors')
 const express = require('express');
 const connect = require('./config/connect')
 const gotoController = require('./controllers/goto')
+const bitlyController = require('./controllers/bitly')
 const { validateUrl } = require('./middlewares');
 var abTest = require('express-ab');
 var ab = abTest.test('my-ab-test', { cookie: false });
@@ -15,8 +16,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // implementing a/b test  70/30 
+// total should be 1 , ratios can be changed
 app.post('/', validateUrl, ab(null, 0.7), gotoController.create)
-//app.post('/', validateUrl, ab(null, 0.3), bitlyController.create)
+app.post('/', validateUrl, ab(null, 0.3), bitlyController.create)
 
 // shorten url redirection
 app.get('/:shortCode', gotoController.redirect)

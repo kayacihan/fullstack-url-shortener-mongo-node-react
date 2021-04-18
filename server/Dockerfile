@@ -1,12 +1,13 @@
-FROM node:12
-# Create app directory
-WORKDIR /usr/src/server
-# Install app dependencies
-COPY package*.json ./
+FROM node:12-alpine as build
+
+WORKDIR /app
+COPY package.json /app/package.json
 RUN npm install
-RUN npm install -g nodemon
-# Copy app source code
-COPY . .
-#Expose port and start application
-EXPOSE 3005
-CMD [ "npm", "run", "dev" ]
+COPY . /app
+RUN npm run build
+
+FROM nginx:1.16.0-alpine
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 3000
+CMD ["nginx", "-g", "daemon off;"]
