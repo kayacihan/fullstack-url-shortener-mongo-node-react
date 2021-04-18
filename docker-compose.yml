@@ -1,17 +1,19 @@
-version: "3.1"
+version: "3"
 services:
     client:
-        container_name: react_1
+        container_name: react
         build: ./client
         ports:
             - "3333:3000"
+        volumes:
+            - ./client/src:/usr/app/src
+            - ./client/public:/usr/app/public    
         links:
             - api
         networks:
             - gotoappnetwork
-
     api:
-        container_name: node_1
+        container_name: node
         build: ./server
         ports:
             - "3005:3005"
@@ -30,7 +32,6 @@ services:
             - "27017:27017"
         networks:
             - gotoappnetwork
-
 networks:
     gotoappnetwork:
         driver: bridge
