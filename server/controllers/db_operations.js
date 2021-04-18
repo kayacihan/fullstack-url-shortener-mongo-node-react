@@ -4,7 +4,7 @@ const Link = require('../models/links')
 const getUrlfromShorten = async (shortCode) => {
   try {
     const data = await Link.findOneAndUpdate({ short: shortCode }, { $inc: { 'count': 1 } })
-    if (data == null) return { error: `wrong short code ${shortCode}` };
+    if (data == null) return { error: "Invalid short url" };
     return data //send long url
   } catch (err) {
     return { error: 'Server error' };
@@ -14,10 +14,10 @@ const getUrlfromShorten = async (shortCode) => {
 // creating a new shortcode
 const createNewShorten = async (LinkDetails) => {
   try {
-    const data = await Link.create(LinkDetails)
+    const data = await Link.create({ count: 1, ...LinkDetails })
     return data
   } catch (err) {
-    return { err };
+    return { error: 'Server error' };
   }
 }
 

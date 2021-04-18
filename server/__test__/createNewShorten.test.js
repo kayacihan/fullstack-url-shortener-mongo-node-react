@@ -2,20 +2,17 @@ const Link = require('../models/links')
 const controller = require('../controllers/db_operations')
 const shortId = require('shortid')
 
-
-
-describe('getUrlfromShorten', () => {
-  test('get original link by shorten code', async () => {
-    const link = await Link.create({
+describe('createNewShorten', () => {
+  test('create a shorten link', async () => {
+    const linkConfig = {
       original: "https://www.youtube.com/",
       short: shortId.generate(),
-      count: 1,
       api: "goto"
-    })
-    const { original } = await controller.getUrlfromShorten(link.short)
-    expect(original).toBe(link.original)
+    }
+    const { short } = await controller.createNewShorten(linkConfig)
+    const match = await Link.findOne({ short })
+    expect(match.short).toBe(short)
   })
 })
-
 
 

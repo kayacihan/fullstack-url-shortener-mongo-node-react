@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "clear & jest",
+    "dev": "nodemon",
     "prod": "node index.js"
   },
   "repository": {
@@ -27,15 +28,18 @@
   },
   "jest": {
     "verbose": true,
-    "testURL": "http://localhost:9879/",
+    "testURL": "http://localhost:3452/",
     "testEnvironment": "node",
-    "setupTestFrameworkScriptFile": "<rootDir>/testconfig.js",
+    "setupFilesAfterEnv": [
+      "<rootDir>/testconfig.js"
+    ],
     "restoreMocks": true,
     "testPathIgnorePatterns": [
       "dist/"
     ]
   },
   "devDependencies": {
-    "jest": "^26.6.3"
+    "jest": "^26.6.3",
+    "supertest": "^6.1.3"
   }
 }

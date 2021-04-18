@@ -10,7 +10,7 @@ beforeEach(async done => {
   const db = shortid()
   function clearDB() {
     for (var i in mongoose.connection.collections) {
-      mongoose.connection.collections[i].deleteMany(function () { })
+      mongoose.connection.collections[i].deleteOne(function () { })
     }
     return done()
   }

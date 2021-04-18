@@ -4,8 +4,9 @@ WORKDIR /usr/src/server
 # Install app dependencies
 COPY package*.json ./
 RUN npm install
+RUN npm install -g nodemon
 # Copy app source code
 COPY . .
 #Expose port and start application
 EXPOSE 3005
-CMD [ "npm", "run", "prod" ]
+CMD [ "npm", "run", "dev" ]

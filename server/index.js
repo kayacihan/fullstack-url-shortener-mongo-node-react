@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const connect = require('./config/connect')
-const Link = require('./models/links')
+const gotoController = require('./controllers/goto')
 const cors = require('cors')
 
 const app = express();
@@ -11,16 +11,9 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.post('/', async (req, res) => {
-    const mylink = req.body
-    const link = await Link.create(mylink)
-    res.status(201).json(link.toJSON())
-})
+app.post('/', gotoController.create)
+app.get('/:shortCode', gotoController.redirect)
 
-app.get('/', async (_, res) => {
-    const link = await Link.find({}).lean().exec()
-    res.status(200).json(link)
-})
 
 const dbURL = process.env.MONGO_DB_URL;
 const port = process.env.PORT
@@ -29,4 +22,6 @@ connect(dbURL)
         console.log(`API server is running on port ${port}`)
     }))
     .catch(e => console.error(e))
+
+module.exports = app
 
