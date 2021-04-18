@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const connect = require('./config/connect')
 const gotoController = require('./controllers/goto')
+const { validateUrl } = require('./middlewares');
 const cors = require('cors')
 
 const app = express();
@@ -11,7 +12,7 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.post('/', gotoController.create)
+app.post('/', validateUrl, gotoController.create)
 app.get('/:shortCode', gotoController.redirect)
 
 
@@ -23,5 +24,4 @@ connect(dbURL)
     }))
     .catch(e => console.error(e))
 
-module.exports = app
 
