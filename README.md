@@ -13,7 +13,7 @@ A url shortener Using React, Node, Mongo and Docker with implementing a/b testin
     - [ Environment variables](#environment-variables)
     - [ Installation ](#installation)
     - [ Running ](#running)
-- [API Documentation](#api-documentation)
+- [ Documentation](#documentation)
     - [Mongo Atlas](#MongoDB-Atlas-setting)
     - [Bitly Setting](#Bitly-setting)
 
@@ -48,13 +48,13 @@ cp .env.example .env
         ```bash
         sudo docker-compose up 
         ```
-        If you have cache issues, You can try this command  
+        below command can be tried, if any cache issues on docker-compose and  `sudo docker-compose up` can be re-run.
         ```bash
         docker-compose down -v --rmi "all" 
         ```
     * #### run manually
     
-        You should have a local MongoDB server or [Mongo Atlas](#MongoDB-Atlas-setting) and MONGO_DB_URL should be modified in the `.env` file. 
+        While using Local MongoDB  or [Mongo Atlas](#MongoDB-Atlas-setting), `MONGO_DB_URL` should be modified in the `.env` file.  
 
         - run api 
 
@@ -73,7 +73,7 @@ cp .env.example .env
             
             npm install
             
-            node start 
+            npm run start 
             ```
 
         * ### Website will be running on 3333 port
@@ -93,7 +93,7 @@ cp .env.example .env
 
 ## Environment Variables
 
-The environment variables can be found on Server ( /server ) and modified in the `.env` file. They come with these default values:
+The environment variables can be found on Node Server ( /server ) and modified in the `.env` file. 
 
 ```bash
 # Port number
